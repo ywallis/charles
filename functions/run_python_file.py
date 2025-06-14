@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from google.genai import types
+
 
 def run_python_file(working_directory: str, file_path: str) -> str:
     try:
@@ -35,3 +37,18 @@ def run_python_file(working_directory: str, file_path: str) -> str:
         return f"STDOUT: {output.stdout}, STDERR: {output.stderr}, Process exited with code {output.returncode}"
     else:
         return f"STDOUT: {output.stdout}, STDERR: {output.stderr}"
+
+
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Executes a python file. Returns an error if the file doesn't exist or doesn't have a .py extension.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The file path for the file that should be executed.",
+            ),
+        },
+    ),
+)
