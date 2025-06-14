@@ -17,13 +17,17 @@ def get_files_info(working_directory: str, directory: str | None = None) -> str:
 
     output_string = ""
 
-    files = os.listdir(directory_path)
-    for file_name in files:
-        file_path = os.path.join(directory_path, file_name)
-        file_size = os.path.getsize(file_path)
-        is_dir = os.path.isdir(file_path)
-        output_string += (
-            f"- {file_name}: file_size={file_size} bytes, is_dir={is_dir}\n"
-        )
+    try:
+        files = os.listdir(directory_path)
+        for file_name in files:
+            file_path = os.path.join(directory_path, file_name)
+            file_size = os.path.getsize(file_path)
+            is_dir = os.path.isdir(file_path)
+            output_string += (
+                f"- {file_name}: file_size={file_size} bytes, is_dir={is_dir}\n"
+            )
+
+    except Exception as e:
+        return f"Error encountered: {e}"
 
     return output_string
