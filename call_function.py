@@ -37,7 +37,7 @@ def call_function(function_call_part: types.FunctionCall, verbose=False):
         )
 
     result = functions[function_name](
-        **function_call_part.args, working_directory="./calculator"
+        **function_call_part.args, working_directory="./project"
     )
 
     return types.Content(
